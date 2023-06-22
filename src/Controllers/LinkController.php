@@ -72,6 +72,12 @@ class LinkController extends BaseController
             return null;
         }
 
+        $userTime=strtotime($user->class_expire);
+        $countTime=ceil((time()-$userTime));
+        if ($countTime > 1) {
+            return null;
+        }
+
         $opts = $request->getQueryParams();
 
         // 订阅节点筛选(定制)
@@ -168,7 +174,8 @@ class LinkController extends BaseController
                     $subscribe_type = $SubscribeExtend['filename'];
 
                     $class = ('get' . $SubscribeExtend['class']);
-                    $content = self::$class($user, $query_value, $opts, $Rule);
+//                    $content = self::$class($user, $query_value, $opts, $Rule);
+                    $content = file_get_contents('C:\Users\mioopp\Desktop\Clash_1687428449.yaml');
                     $getBody = self::getBody(
                         $user,
                         $response,

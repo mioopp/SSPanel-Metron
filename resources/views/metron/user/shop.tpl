@@ -16,7 +16,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <a href="javascript:;" class="btn {$style[$theme_style]['global']['btn_subheader']} font-weight-bold py-3 px-6" data-toggle="modal" data-target="#traffic_package_modal">购买流量包</a>
+{*                                    <a href="javascript:;" class="btn {$style[$theme_style]['global']['btn_subheader']} font-weight-bold py-3 px-6" data-toggle="modal" data-target="#traffic_package_modal">购买流量包</a>*}
                                 </div>
                             </div>
                         </div>
@@ -149,33 +149,29 @@
                                         {include file='include/shop/Trial.tpl'}
                                     {/if}
 
-                                    {foreach $metron['shop_plan'] as $shop_class_name => $shop_info_time_id}
-                                    {foreach $shop_info_time_id as $shop_info => $shop_time_id}
+                                    {foreach $shops as $shop}
                                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
                                         <div class="card card-custom {$style[$theme_style]['shop']['card_head']} gutter-b card-stretch {$metron['style_shadow']}" style="border-bottom-right-radius: 1.5rem;border-bottom-left-radius: 1.5rem;">
                                             <div class="card-header border-0" style="min-height: 50px;">
                                             </div>
                                             <div class="card-body d-flex flex-column p-0" style="position: relative;">
                                                 <div class="" style="height: 100px; min-height: 100px;">
-                                                    <h3 class="display-3 text-white text-center"><strong>{$shop_class_name}</strong></h3>
+                                                    <h3 class="display-3 text-white text-center"><strong>{$shop->name}</strong></h3>
                                                 </div>
                                                 <div class="card-spacer {$style[$theme_style]['shop']['card_bg']} card-rounded flex-grow-1 {$metron['style_shadow']}">
 
-                                                    <ul class="dashboard-tabs nav nav-pills row nav-primary row-paddingless m-0 p-0" role="tablist">
-                                                        {foreach $shop_time_id as $shop_time => $shop_id}
-                                                        <li class="nav-item d-flex col flex-grow-1 flex-shrink-0 ml-1 mr-1 mb-0 cursor_onclick">
-                                                            <a class="nav-link border d-flex flex-grow-1 rounded flex-column align-items-center p-1 {if $shop_id@index === 0} active{/if}" data-toggle="pill" href="#tab-shop-{$shop_id}">
-                                                                <span class="nav-text font-size-lg py-2 font-weight-bold text-center">{$shop_time}</span>
-                                                            </a>
-                                                        </li>
-                                                        {/foreach}
-                                                    </ul>
+{*                                                    <ul class="dashboard-tabs nav nav-pills row nav-primary row-paddingless m-0 p-0" role="tablist">*}
+{*                                                        {foreach $shop_time_id as $shop_time => $shop_id}*}
+{*                                                        <li class="nav-item d-flex col flex-grow-1 flex-shrink-0 ml-1 mr-1 mb-0 cursor_onclick">*}
+{*                                                            <a class="nav-link border d-flex flex-grow-1 rounded flex-column align-items-center p-1 {if $shop_id@index === 0} active{/if}" data-toggle="pill" href="#tab-shop-{$shop_id}">*}
+{*                                                                <span class="nav-text font-size-lg py-2 font-weight-bold text-center">{$shop_time}</span>*}
+{*                                                            </a>*}
+{*                                                        </li>*}
+{*                                                        {/foreach}*}
+{*                                                    </ul>*}
 
                                                     <div class="tab-content m-0 p-0">
-                                                        {foreach $shop_time_id as $shop_time => $shop_id}
-                                                        <div class="tab-pane {if $shop_id@index === 0} active show{/if}" id="tab-shop-{$shop_id}" role="tabpanel">
-                                                            {foreach $shops as $shop}
-                                                            {if $shop->id !== $shop_id}{continue}{/if}
+                                                        <div class="tab-pane active show" id="tab-shop-{$shop_id}" role="tabpanel">
                                                             <div class="row">
                                                                 <div class="col pl-6 pt-6 pb-0">
                                                                     <div class="display-3 text-primary font-weight-bolder"><small><i class="fa fa-yen-sign text-primary"></i></small> <strong>{$shop->price}</strong></div>
@@ -200,7 +196,7 @@
                                                                 </div>
                                                                 <div class="col pl-6 pt-6 pb-0">
                                                                     <div class="font-size-sm text-muted font-weight-bold">等级时长</div>
-                                                                    <div class="font-size-h4 font-weight-bolder">{$shop->class_expire()} 天</div>
+                                                                    <div class="font-size-h4 font-weight-bolder">{$shop->auto_renew} 天</div>
                                                                 </div>
                                                             </div>
                                                             <div class="row text-center {$style[$theme_style]['shop']['card_text']}">
@@ -248,15 +244,15 @@
                                                                 <button class="btn {$style[$theme_style]['shop']['card_btn']} btn-block btn-pill" href="javascript:void(0);" type="button" onClick="shop.metronBuy('{$shop->id}',{$shop->auto_renew});" id="buytext-{$shop->id}">购买</button>
                                                                 {/if}
                                                             </div>
-                                                            {/foreach}
+
                                                         </div>
-                                                        {/foreach}
+
                                                     </div>
                                                 </div>
                                             <div class="resize-triggers"><div class="expand-trigger"><div style="width: 414px; height: 419px;"></div></div><div class="contract-trigger"></div></div></div>
                                         </div>
                                     </div>
-                                    {/foreach}
+
                                     {/foreach}
 
                                     {if $metron['shop_Experience_true'] === true && $user->class === -1 && $user->lastSsTime() == '从未使用喵' && $metron['shop_Experience_pos'] === 'bottom'}

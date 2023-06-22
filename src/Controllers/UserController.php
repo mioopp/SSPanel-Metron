@@ -867,6 +867,8 @@ class UserController extends BaseController
         }
 
         $user->money = bcsub($user->money, $price, 2);
+        $user->class = 1;
+        $user->class_expire = date('Y-m-d H:i:s', strtotime('+'.$shop->auto_renew.' days'));
         $user->save();
 
         if ($disableothers == 1) {

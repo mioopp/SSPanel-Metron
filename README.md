@@ -65,7 +65,11 @@ chown -R www:www 你的文件夹名/
 ```sql
 UPDATE user SET theme='metron'
 ```
-
+创建管理员用户
+```
+php xcat User createUser
+```
+php xcat Tool initQQWry
 ### 使用宝塔面板的计划任务配置
 ```
 每日任务 (必须)
